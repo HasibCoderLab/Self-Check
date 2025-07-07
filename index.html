@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>নিজেকে যাচাই করুন</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>📘 নিজেকে যাচাই করুন</h1>
+
+    <div class="input-group">
+      <label for="dreamSubject">🎯 স্বপ্নের বিষয়:</label>
+      <input type="text" id="dreamSubject" placeholder="উদা: Physics">
+    </div>
+
+    <div id="subjects"></div>
+
+    <button class="add-btn" onclick="addSubject()">➕ নতুন বিষয় যোগ করুন</button>
+    <button class="check-btn" onclick="generateResult()">✅ নিজেকে যাচাই করুন</button>
+
+    <canvas id="marksChart"></canvas>
+
+    <div id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
