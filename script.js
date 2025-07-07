@@ -1,6 +1,33 @@
 let subjectsContainer = document.getElementById('subjects');
 let chart;
 
+// Voice loading
+let voices = [];
+
+function loadVoices() {
+  voices = speechSynthesis.getVoices();
+
+  //  en-US voice 
+  if (!voices.length) {
+    speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+  }
+}
+
+loadVoices();
+
+function speakMessage(message, lang = 'en-US') {
+  const utterance = new SpeechSynthesisUtterance(message);
+  const selectedVoice = voices.find(voice => voice.lang === lang);
+
+  if (selectedVoice) {
+    utterance.voice = selectedVoice;
+  }
+  utterance.lang = lang;
+  speechSynthesis.speak(utterance);
+}
+
 function addSubject() {
   const row = document.createElement('div');
   row.className = 'subject-row';
@@ -44,7 +71,6 @@ function generateResult() {
       resultHTML += `<p>${name}: ${percent}%</p>`;
     }
 
-    // Dream subject check
     if (name.toLowerCase() === dreamSubject.toLowerCase()) {
       if (percent >= 75) {
         resultHTML += `<p style="color:green;"><strong>🌟 তুমি স্বপ্নের পথে এগিয়ে চলেছ!</strong></p>`;
@@ -59,15 +85,10 @@ function generateResult() {
   document.getElementById('result').innerHTML = resultHTML;
 
   if (hasLow) {
-    const voice = new SpeechSynthesisUtterance('You need to improve more.s');
-    // voice.lang = 'bn-BD';
-    voice.lang = 'eng';
-
-    speechSynthesis.speak(voice);
+    speakMessage("You need to improve more.", "en-US");
   }
 
   localStorage.setItem('marks', JSON.stringify(results));
-
   renderChart(labels, percentages);
 }
 
