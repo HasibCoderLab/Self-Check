@@ -27,6 +27,13 @@ function speakMessage(message, lang = 'en-US') {
   speechSynthesis.speak(utterance);
 }
 
+function showMessageAndAlert(text, voiceText, color = 'black') {
+  const resultDiv = document.getElementById('result');
+  resultDiv.innerHTML += `<p style="color:${color}; font-weight:bold;">${text}</p>`;
+  speakMessage(voiceText, 'en-US');
+  alert(voiceText);
+}
+
 function addSubject() {
   const row = document.createElement('div');
   row.className = 'subject-row';
@@ -52,7 +59,8 @@ function generateResult() {
   let hasLow = false;
   let totalPercentSum = 0;
   let validSubjectsCount = 0;
-  let resultHTML = '';
+
+  document.getElementById('result').innerHTML = ''; // ক্লিয়ার করে শুরু
 
   for (let i = 0; i < subjectNames.length; i++) {
     let name = subjectNames[i].value.trim();
@@ -69,10 +77,10 @@ function generateResult() {
     validSubjectsCount++;
 
     if (percent < 40) {
-      resultHTML += `<p class="low-score">${name}: ${percent}% - নিজেকে আরো ইম্প্রুভ করতে হবে!</p>`;
+      document.getElementById('result').innerHTML += `<p class="low-score" style="color:#e74c3c;">${name}: ${percent}% - নিজেকে আরো ইম্প্রুভ করতে হবে!</p>`;
       hasLow = true;
     } else {
-      resultHTML += `<p>${name}: ${percent}%</p>`;
+      document.getElementById('result').innerHTML += `<p>${name}: ${percent}%</p>`;
     }
 
     results.push({ name, achieved, total });
@@ -82,15 +90,25 @@ function generateResult() {
 
   if (dream) {
     if (avgPercent >= 75) {
-      resultHTML += `<p style="color:green;"><strong>🌟 তোমার শিক্ষাগত পারফরম্যান্স ভালো, তুমি তোমার স্বপ্নের <em>${dream}</em> পথে এগিয়ে যাচ্ছো!</strong></p>`;
+      showMessageAndAlert(
+        `🌟 তোমার শিক্ষাগত পারফরম্যান্স ভালো, তুমি তোমার স্বপ্নের <em>${dream}</em> পথে এগিয়ে যাচ্ছো!`,
+        "Your academic performance is good. You are progressing towards your dream.",
+        'green'
+      );
     } else if (avgPercent >= 40) {
-      resultHTML += `<p style="color:orange;">⚠️ শিক্ষাগত পারফরম্যান্স ভালো না হলেও, স্বপ্নের জন্য আরও মনোযোগ দরকার।</p>`;
+      showMessageAndAlert(
+        "⚠️ শিক্ষাগত পারফরম্যান্স ভালো না হলেও, স্বপ্নের জন্য আরও মনোযোগ দরকার।",
+        "Academic performance is not very good. More attention is needed for your dream.",
+        'orange'
+      );
     } else {
-      resultHTML += `<p style="color:red;">❌ শিক্ষাগত পারফরম্যান্স খুব কম, স্বপ্ন পূরণের জন্য কঠোর পরিশ্রম দরকার।</p>`;
+      showMessageAndAlert(
+        "❌ শিক্ষাগত পারফরম্যান্স খুব কম, স্বপ্ন পূরণের জন্য কঠোর পরিশ্রম দরকার।",
+        "Academic performance is very low. Hard work is required to achieve your dream.",
+        'red'
+      );
     }
   }
-
-  document.getElementById('result').innerHTML = resultHTML;
 
   if (hasLow) {
     speakMessage("You need to improve more.", "en-US");
