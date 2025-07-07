@@ -59,8 +59,10 @@ function generateResult() {
   document.getElementById('result').innerHTML = resultHTML;
 
   if (hasLow) {
-    const voice = new SpeechSynthesisUtterance('নিজেকে আরো ইম্প্রুভ করতে হবে');
-    voice.lang = 'bn-BD';
+    const voice = new SpeechSynthesisUtterance('You need to improve more.s');
+    // voice.lang = 'bn-BD';
+    voice.lang = 'eng';
+
     speechSynthesis.speak(voice);
   }
 
