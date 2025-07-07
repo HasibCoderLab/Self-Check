@@ -7,7 +7,6 @@ let voices = [];
 function loadVoices() {
   voices = speechSynthesis.getVoices();
 
-  //  en-US voice 
   if (!voices.length) {
     speechSynthesis.onvoiceschanged = () => {
       voices = speechSynthesis.getVoices();
@@ -54,7 +53,7 @@ function generateResult() {
   let resultHTML = '';
 
   for (let i = 0; i < subjectNames.length; i++) {
-    let name = subjectNames[i].value;
+    let name = subjectNames[i].value.trim();
     let achieved = parseFloat(achievedMarks[i].value);
     let total = parseFloat(totalMarks[i].value);
 
@@ -90,6 +89,9 @@ function generateResult() {
 
   localStorage.setItem('marks', JSON.stringify(results));
   renderChart(labels, percentages);
+
+  // Optional: Scroll to result section
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
 }
 
 function renderChart(labels, data) {
