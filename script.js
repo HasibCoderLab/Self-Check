@@ -20,20 +20,23 @@ function speakMessage(message, lang = 'en-US') {
   speechSynthesis.speak(utterance);
 }
 
-function showMessageAndAlert(text, voiceText, color = 'black') {
-  const resultDiv = document.getElementById('result');
-  resultDiv.innerHTML += `<p style="color:${color}; font-weight:bold;">${text}</p>`;
-  speakMessage(voiceText, 'en-US');
-  alert(voiceText);
+function showSwalWithVoice({ icon, title, text, voiceText, color = 'black' }) {
+  Swal.fire({
+    icon: icon,
+    title: title,
+    html: `<p style="color:${color}; font-weight:bold;">${text}</p>`,
+  }).then(() => {
+    if (voiceText) speakMessage(voiceText);
+  });
 }
 
 function addSubject() {
   const row = document.createElement('div');
   row.className = 'subject-row';
   row.innerHTML = `
-    <input type="text" placeholder="বিষয়" class="subject-name">
-    <input type="number" placeholder="প্রাপ্ত নম্বর" class="achieved-mark">
-    <input type="number" placeholder="পূর্ণ নম্বর" class="total-mark">
+    <input type="text" placeholder="বিষয়" class="subject-name" />
+    <input type="number" placeholder="প্রাপ্ত নম্বর" class="achieved-mark" />
+    <input type="number" placeholder="পূর্ণ নম্বর" class="total-mark" />
   `;
   subjectsContainer.appendChild(row);
 }
@@ -58,11 +61,22 @@ function generateResult() {
     let total = parseFloat(totalMarks[i].value);
 
     if (!name || isNaN(achieved) || isNaN(total)) {
-      Swal.fire({ icon: 'warning', title: 'ফর্ম অসম্পূর্ণ', text: 'অনুগ্রহ করে সব ইনপুট পূরণ করুন।' });
+      showSwalWithVoice({
+        icon: 'warning',
+        title: 'ফর্ম অসম্পূর্ণ',
+        text: 'অনুগ্রহ করে সব ইনপুট পূরণ করুন।',
+        voiceText: 'Please fill all the inputs correctly.'
+      });
       return;
     }
+
     if (achieved > total) {
-      Swal.fire({ icon: 'error', title: 'Oops...', text: `"${name}" এর প্রাপ্ত নম্বর পূর্ণ নম্বরের চেয়ে বেশি হতে পারে না!` });
+      showSwalWithVoice({
+        icon: 'error',
+        title: 'Oops...',
+        text: `"${name}" এর প্রাপ্ত নম্বর পূর্ণ নম্বরের চেয়ে বেশি হতে পারে না!`,
+        voiceText: `"${name}" er prapto nombor purno nomborer cheye beshi hote pare na!`
+      });
       return;
     }
 
@@ -78,6 +92,7 @@ function generateResult() {
     } else {
       document.getElementById('result').innerHTML += `<p>${name}: ${percent}%</p>`;
     }
+
     results.push({ name, achieved, total });
   }
 
@@ -85,11 +100,29 @@ function generateResult() {
 
   if (dream) {
     if (avgPercent >= 75) {
-      showMessageAndAlert(`🌟 তোমার শিক্ষাগত পারফরম্যান্স ভালো, তুমি তোমার স্বপ্নের <em>${dream}</em> পথে এগিয়ে যাচ্ছো!`, "Your academic performance is good. You are progressing towards your dream.", 'green');
+      showSwalWithVoice({
+        icon: 'success',
+        title: 'অভিনন্দন!',
+        text: `🌟 তোমার শিক্ষাগত পারফরম্যান্স ভালো, তুমি তোমার স্বপ্নের <em>${dream}</em> পথে এগিয়ে যাচ্ছো!`,
+        voiceText: 'Your academic performance is good. You are progressing towards your dream.',
+        color: 'green'
+      });
     } else if (avgPercent >= 40) {
-      showMessageAndAlert("⚠️ শিক্ষাগত পারফরম্যান্স ভালো না হলেও, স্বপ্নের জন্য আরও মনোযোগ দরকার।", "Academic performance is not very good. More attention is needed for your dream.", 'orange');
+      showSwalWithVoice({
+        icon: 'warning',
+        title: 'মনোযোগ দিন',
+        text: '⚠️ শিক্ষাগত পারফরম্যান্স ভালো না হলেও, স্বপ্নের জন্য আরও মনোযোগ দরকার।',
+        voiceText: 'Academic performance is not very good. More attention is needed for your dream.',
+        color: 'orange'
+      });
     } else {
-      showMessageAndAlert("❌ শিক্ষাগত পারফরম্যান্স খুব কম, স্বপ্ন পূরণের জন্য কঠোর পরিশ্রম দরকার।", "Academic performance is very low. Hard work is required to achieve your dream.", 'red');
+      showSwalWithVoice({
+        icon: 'error',
+        title: 'সতর্কতা!',
+        text: '❌ শিক্ষাগত পারফরম্যান্স খুব কম, স্বপ্ন পূরণের জন্য কঠোর পরিশ্রম দরকার।',
+        voiceText: 'Academic performance is very low. Hard work is required to achieve your dream.',
+        color: 'red'
+      });
     }
   }
 
