@@ -264,3 +264,24 @@ input {
     flex-direction: column;
   }
 }
+
+.copyright {
+  text-align: center;
+  margin-top: 30px;
+  padding: 15px 10px;
+  font-size: 0.95em;
+  background-color: #e8f4ff;
+  border-top: 1px solid #ccc;
+  color: #333;
+}
+
+.copyright a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.copyright a:hover {
+  color: #0056b3;
+}
