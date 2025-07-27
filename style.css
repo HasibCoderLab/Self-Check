@@ -1,94 +1,4 @@
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Noto Sans Bengali', sans-serif;
-  background-color: #f0f8ff;
-  color: #333;
-  padding: 20px;
-}
-
-.container {
-  max-width: 800px;
-  margin: auto;
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #005b96;
-}
-
-.input-group {
-  margin-bottom: 20px;
-}
-
-label {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-input {
-  padding: 10px;
-  margin: 5px 0;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-  width: calc(100% - 22px);
-}
-
-.subject-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.subject-row input {
-  flex: 1;
-}
-
-.add-btn, .check-btn {
-  display: block;
-  margin: 15px auto;
-  padding: 12px 20px;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.add-btn:hover, .check-btn:hover {
-  background-color: #0056b3;
-}
-
-#result {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 1.2em;
-}
-
-#marksChart {
-  margin-top: 40px;
-  max-height: 300px;
-  width: 100%;
-}
-
-.low-score {
-  color: red;
-  font-weight: bold;
-}
- */
-
- @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap');
 
 * {
   margin: 0;
@@ -118,29 +28,24 @@ h1 {
   color: #005b96;
 }
 
-.input-group {
+.input-group,
+.subject-row {
   margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 label {
   font-weight: bold;
-  margin-right: 10px;
 }
 
 input {
   padding: 12px;
-  margin: 5px 0;
   border: 1px solid #aaa;
   border-radius: 6px;
   font-size: 1em;
-  width: 100%;
-}
-
-.subject-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
+  flex: 1 1 100%;
 }
 
 .subject-row input {
@@ -148,22 +53,33 @@ input {
   min-width: 100px;
 }
 
-.add-btn, .check-btn {
+button {
   display: block;
   margin: 15px auto;
   padding: 14px 22px;
   font-size: 1em;
   border: none;
-  background-color: #28a745;
-  color: white;
-  font-weight: bold;
   border-radius: 10px;
+  font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
+  color: white;
 }
 
-.add-btn:hover, .check-btn:hover {
+.add-btn {
+  background-color: #28a745;
+}
+
+.add-btn:hover {
   background-color: #1f7d38;
+}
+
+.check-btn {
+  background-color: #007bff;
+}
+
+.check-btn:hover {
+  background-color: #0056b3;
 }
 
 #result {
@@ -174,8 +90,8 @@ input {
 
 #marksChart {
   margin-top: 30px;
-  width: 100% !important;
-  height: auto !important;
+  width: 100%;
+  height: auto;
 }
 
 .low-score {
@@ -196,7 +112,7 @@ input {
   font-weight: bold;
 }
 
-.social-links .links {
+.links {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -250,7 +166,8 @@ input {
     flex-direction: column;
   }
 
-  .add-btn, .check-btn {
+  .add-btn,
+  .check-btn {
     width: 100%;
     margin-bottom: 10px;
   }
@@ -260,7 +177,7 @@ input {
     padding: 10px;
   }
 
-  .social-links .links {
+  .links {
     flex-direction: column;
   }
 }
