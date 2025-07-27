@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -86,6 +86,103 @@ input {
   color: red;
   font-weight: bold;
 }
+ */
+
+ @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans Bengali', sans-serif;
+  background-color: #f0f8ff;
+  color: #333;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.08);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #005b96;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+input {
+  padding: 12px;
+  margin: 5px 0;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  font-size: 1em;
+  width: 100%;
+}
+
+.subject-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.subject-row input {
+  flex: 1;
+  min-width: 100px;
+}
+
+.add-btn, .check-btn {
+  display: block;
+  margin: 15px auto;
+  padding: 14px 22px;
+  font-size: 1em;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-btn:hover, .check-btn:hover {
+  background-color: #1f7d38;
+}
+
+#result {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+#marksChart {
+  margin-top: 30px;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.low-score {
+  color: red;
+  font-weight: bold;
+}
+
 .social-links {
   text-align: center;
   margin-top: 40px;
@@ -111,11 +208,12 @@ input {
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  padding: 8px 15px;
+  padding: 10px 15px;
   border-radius: 8px;
   font-weight: bold;
   background-color: #f3f3f3;
   transition: all 0.3s ease;
+  font-size: 1em;
 }
 
 .link img {
@@ -147,3 +245,22 @@ input {
   color: #c32aa3;
 }
 
+@media (max-width: 600px) {
+  .subject-row {
+    flex-direction: column;
+  }
+
+  .add-btn, .check-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .link {
+    font-size: 0.95em;
+    padding: 10px;
+  }
+
+  .social-links .links {
+    flex-direction: column;
+  }
+}
