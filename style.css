@@ -86,3 +86,64 @@ input {
   color: red;
   font-weight: bold;
 }
+.social-links {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.social-links p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.social-links .links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  background-color: #f3f3f3;
+  transition: all 0.3s ease;
+}
+
+.link img {
+  width: 20px;
+  height: 20px;
+}
+
+.link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.portfolio {
+  background-color: #cce7ff;
+}
+
+.facebook {
+  background-color: #e8f4ff;
+  color: #1877f2;
+}
+
+.github {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.instagram {
+  background-color: #fde2e4;
+  color: #c32aa3;
+}
+
