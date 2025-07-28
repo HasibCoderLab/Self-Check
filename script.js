@@ -159,3 +159,22 @@ function renderChart(labels, data) {
     }
   });
 }
+
+const messageBox = document.getElementById('performanceMessage');
+messageBox.className = 'performance-message'; // reset
+
+if (dream) {
+  if (avgPercent >= 75) {
+    messageBox.textContent = `🌟 তোমার শিক্ষাগত পারফরম্যান্স ভালো, তুমি তোমার স্বপ্নের ${dream} পথে এগিয়ে যাচ্ছো!`;
+    messageBox.classList.add('good');
+  } else if (avgPercent >= 40) {
+    messageBox.textContent = `⚠️ শিক্ষাগত পারফরম্যান্স ভালো না হলেও, স্বপ্নের জন্য আরও মনোযোগ দরকার।`;
+    messageBox.classList.add('moderate');
+  } else {
+    messageBox.textContent = `❌ শিক্ষাগত পারফরম্যান্স খুব কম, স্বপ্ন পূরণের জন্য কঠোর পরিশ্রম দরকার।`;
+    messageBox.classList.add('low');
+  }
+} else {
+  messageBox.textContent = '';  // If you don't dream, don't show anything.
+}
+
