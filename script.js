@@ -54,6 +54,9 @@ function generateResult() {
   let totalPercentSum = 0;
   let validSubjectsCount = 0;
   document.getElementById('result').innerHTML = '';
+  const messageBox = document.getElementById('performanceMessage');
+  messageBox.className = 'performance-message'; // reset
+  messageBox.textContent = ''; // reset content
 
   for (let i = 0; i < subjectNames.length; i++) {
     let name = subjectNames[i].value.trim();
@@ -103,10 +106,12 @@ function generateResult() {
       showSwalWithVoice({
         icon: 'success',
         title: 'অভিনন্দন!',
-        text: `🌟 তোমার শিক্ষাগত পারফরম্যান্স ভালো, তুমি তোমার স্বপ্নের <em>${dream}</em> পথে এগিয়ে যাচ্ছো!`,
+        text: `🌟 তোমার শিক্ষাগত পারফরম্যান্স ভালো, তুমি তোমার স্বপ্নের ${dream} পথে এগিয়ে যাচ্ছো!`,
         voiceText: 'Your academic performance is good. You are progressing towards your dream.',
         color: 'green'
       });
+      messageBox.textContent = `🌟 তোমার শিক্ষাগত পারফরম্যান্স ভালো, তুমি তোমার স্বপ্নের ${dream} পথে এগিয়ে যাচ্ছো!`;
+      messageBox.classList.add('good');
     } else if (avgPercent >= 40) {
       showSwalWithVoice({
         icon: 'warning',
@@ -115,6 +120,8 @@ function generateResult() {
         voiceText: 'Academic performance is not very good. More attention is needed for your dream.',
         color: 'orange'
       });
+      messageBox.textContent = `⚠️ শিক্ষাগত পারফরম্যান্স ভালো না হলেও, স্বপ্নের জন্য আরও মনোযোগ দরকার।`;
+      messageBox.classList.add('moderate');
     } else {
       showSwalWithVoice({
         icon: 'error',
@@ -123,6 +130,8 @@ function generateResult() {
         voiceText: 'Academic performance is very low. Hard work is required to achieve your dream.',
         color: 'red'
       });
+      messageBox.textContent = `❌ শিক্ষাগত পারফরম্যান্স খুব কম, স্বপ্ন পূরণের জন্য কঠোর পরিশ্রম দরকার।`;
+      messageBox.classList.add('low');
     }
   }
 
@@ -159,22 +168,3 @@ function renderChart(labels, data) {
     }
   });
 }
-
-const messageBox = document.getElementById('performanceMessage');
-messageBox.className = 'performance-message'; // reset
-
-if (dream) {
-  if (avgPercent >= 75) {
-    messageBox.textContent = `🌟 তোমার শিক্ষাগত পারফরম্যান্স ভালো, তুমি তোমার স্বপ্নের ${dream} পথে এগিয়ে যাচ্ছো!`;
-    messageBox.classList.add('good');
-  } else if (avgPercent >= 40) {
-    messageBox.textContent = `⚠️ শিক্ষাগত পারফরম্যান্স ভালো না হলেও, স্বপ্নের জন্য আরও মনোযোগ দরকার।`;
-    messageBox.classList.add('moderate');
-  } else {
-    messageBox.textContent = `❌ শিক্ষাগত পারফরম্যান্স খুব কম, স্বপ্ন পূরণের জন্য কঠোর পরিশ্রম দরকার।`;
-    messageBox.classList.add('low');
-  }
-} else {
-  messageBox.textContent = '';  // If you don't dream, don't show anything.
-}
-

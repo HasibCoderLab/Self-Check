@@ -94,6 +94,31 @@ button {
   height: auto;
 }
 
+.performance-message {
+  margin-top: 20px;
+  padding: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.performance-message.good {
+  background-color: #e0f9e7;
+  color: #2e7d32;
+}
+
+.performance-message.moderate {
+  background-color: #fff4e5;
+  color: #ff9800;
+}
+
+.performance-message.low {
+  background-color: #fdecea;
+  color: #d32f2f;
+}
+
 .low-score {
   color: red;
   font-weight: bold;
@@ -209,4 +234,3 @@ button {
   color: #003366;
   text-shadow: 0 0 3px rgba(0, 102, 204, 0.4);
 }
-
